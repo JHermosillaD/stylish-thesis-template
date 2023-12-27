@@ -43,7 +43,9 @@
 
 % *****************************************************************************
 % **************************** Custom Packages ********************************
-
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\definecolor{uvblue}{HTML}{005BAA}
 % ************************* Algorithms and Pseudocode **************************
 
 %\usepackage{algpseudocode}
@@ -98,7 +100,6 @@
 
 
 % ************************ Formatting / Footnote *******************************
-
 % Don't break enumeration (etc.) across pages in an ugly manner (default 10000)
 %\clubpenalty=500
 %\widowpenalty=500
@@ -118,7 +119,7 @@
 % If you would like to use biblatex for your reference management, as opposed to the default `natbibpackage` pass the option `custombib` in the document class. Comment out the previous line to make sure you don't load the natbib package. Uncomment the following lines and specify the location of references.bib file
 
 %\RequirePackage[backend=biber, style=numeric-comp, citestyle=numeric, sorting=nty, natbib=true]{biblatex}
-%\addbibresource{References/references} %Location of references.bib only for biblatex, Do not omit the .bib extension from the filename.
+%\bibliography{References/references} %Location of references.bib only for biblatex
 
 \fi
 
@@ -189,22 +190,3 @@
 %\fi
 
 % Example todo: \mynote{Hey! I have a note}
-
-% ******************************** Highlighting Changes **********************************
-%% Uncomment the following lines to be able to highlight text/modifications.
-%\ifsetDraft
-%  \usepackage{color, soul}
-%  \newcommand{\hlc}[2][yellow]{{\sethlcolor{#1} \hl{#2}}}
-%  \newcommand{\hlfix}[2]{\texthl{#1}\todo{#2}}
-%\else
-%  \newcommand{\hlc}[2]{}
-%  \newcommand{\hlfix}[2]{}
-%\fi
-
-% Example highlight 1: \hlc{Text to be highlighted}
-% Example highlight 2: \hlc[green]{Text to be highlighted in green colour}
-% Example highlight 3: \hlfix{Original Text}{Fixed Text}
-
-% *****************************************************************************
-% ******************* Better enumeration my MB*************
-\usepackage{enumitem}

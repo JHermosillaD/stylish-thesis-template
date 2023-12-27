@@ -4,15 +4,15 @@
 %%                                                                            %%
 %% A PhD thesis LaTeX template for Cambridge University Engineering Department%%
 %%                                                                            %%
-%% Version: v2.4                                                              %%
+%% Version: v2.3.1                                                             %%
 %% Authors: Krishna Kumar                                                     %%
-%% License: MIT License (c) 2016-2018 Krishna Kumar                           %%
+%% License: MIT License (c) 2016 Krishna Kumar                                %%
 %% GitHub Repo: https://github.com/kks32/phd-thesis-template/                 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ************************** Class Identification ******************************
-\newcommand\fileversion{2.4}
-\newcommand\filedate{2018/04/12}
+\newcommand\fileversion{2.3.1}
+\newcommand\filedate{2016/04/23}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{PhDThesisPSnPDF}[\filedate\space A PhD thesis class file
  by Krishna Kumar (v\fileversion)]
@@ -38,7 +38,7 @@
 \DeclareOption{times}{
   \ifsetFont
     \ClassWarning{PhDThesisPSnPDF}{Font selection conflict: A font package was
-      already specified. Please check the document class options in case you 
+      aleady specified. Please check the document class options in case you 
       have defined two fonts.}
   \else
     \PHD@timestrue
@@ -557,16 +557,16 @@ supported!}
   \usepackage[]{unicode-math}
   \setmainfont[
     Extension = .otf,
-    UprightFont = *-Regular,
-    BoldFont = *-Bold,
-    ItalicFont = *-Italic,
-    BoldItalicFont = *-BoldItalic,
-  ]{XITS}
+    UprightFont = *-regular,
+    BoldFont = *-bold,
+    ItalicFont = *-italic,
+    BoldItalicFont = *-bolditalic,
+  ]{xits}
   
   \setmathfont[ 
     Extension = .otf,
-    BoldFont = XITSMath-Bold,
-  ]{XITSMath-Regular}
+    BoldFont = *bold,
+  ]{xits-math}
   
 \else
   % default: pdfLaTeX
@@ -674,10 +674,7 @@ supported!}
   % PDFLaTeX does it automatically.
 \else
   % dvips
-  \ifxetex
-  \else % If not XeLaTeX
-    \RequirePackage{breakurl} % to split the url over multiple lines
-  \fi
+  \RequirePackage{breakurl} % to split the url over multiple lines
 \fi
   
 % ******************************************************************************
@@ -801,11 +798,10 @@ wish to left align your text}
 \fi
 
 % **************** Clear Header Style on the Last Empty Odd pages **************
-\renewcommand{\cleardoublepage}{\clearpage\if@twoside \ifodd\c@page\else%
+\renewcommand{\cleardoublepage}{\if@twoside \ifodd\c@page\else%
 	\hbox{}%
 	\thispagestyle{empty}  % Empty header styles
-	\newpage%
-	\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+	\if@twocolumn\hbox{}\fi\fi\fi}
 
 
 % ******************************************************************************
@@ -885,23 +881,6 @@ wish to left align your text}
 % called `pdfsubject`.)
 \newcommand{\@subject}{}
 \newcommand{\subject}[1]{\renewcommand{\@subject}{#1}}
-
-% Declaration title text
-\newcommand{\@declarationtitle}{Declaration}
-
-% Acknowledgment title text
-\newcommand{\@acknowledgementstitle}{Acknowledgements}
-
-% Abstract title text
-\newcommand{\@abstracttitle}{Abstract}
-
-% Names for the nomenclature groups
-\newcommand{\@nomenclatureromans}{Roman Symbols}
-\newcommand{\@nomenclaturegreeks}{Greek Symbols}
-\newcommand{\@nomenclatureacronyms}{Acronyms / Abbreviations}
-\newcommand{\@nomenclaturesuperscripts}{Superscripts}
-\newcommand{\@nomenclaturesubscripts}{Subscripts}
-\newcommand{\@nomenclatureothers}{Other Symbols}
 
 
 % These macros define an environment for front matter that is always
@@ -997,7 +976,6 @@ wish to left align your text}
 
 \newenvironment{dedication}
 {
-\cleardoublepage
 \setsinglecolumn
 \vspace*{0.2\textheight}
 \thispagestyle{empty}
@@ -1011,9 +989,8 @@ wish to left align your text}
 % "Declaration" label at the top of the page.
 
 \newenvironment{declaration}{
-\cleardoublepage
 \setsinglecolumn
-\chapter*{\centering \Large \@declarationtitle}
+\chapter*{\centering \Large Declaration}
 \thispagestyle{empty}
 }{
 \flushright
@@ -1029,9 +1006,8 @@ wish to left align your text}
 % "Acknowledgements" label at the top of the page.
 
 \newenvironment{acknowledgements}{
-\cleardoublepage
 \setsinglecolumn
-\chapter*{\centering \Large \@acknowledgementstitle}
+\chapter*{\centering \Large Acknowledgements}
 \thispagestyle{empty}
 }
 
@@ -1041,12 +1017,12 @@ wish to left align your text}
 \RequirePackage[intoc]{nomencl}
 \makenomenclature
 \renewcommand{\nomgroup}[1]{%
-\ifthenelse{\equal{#1}{A}}{\item[\textbf{\@nomenclatureromans}]}{% 
-\ifthenelse{\equal{#1}{G}}{\item[\textbf{\@nomenclaturegreeks}]}{%
-\ifthenelse{\equal{#1}{Z}}{\item[\textbf{\@nomenclatureacronyms}]}{%
-\ifthenelse{\equal{#1}{R}}{\item[\textbf{\@nomenclaturesuperscripts}]}{%
-\ifthenelse{\equal{#1}{S}}{\item[\textbf{\@nomenclaturesubscripts}]}{%
-\ifthenelse{\equal{#1}{X}}{\item[\textbf{\@nomenclatureothers}]}
+\ifthenelse{\equal{#1}{A}}{\item[\textbf{Roman Symbols}]}{%
+\ifthenelse{\equal{#1}{G}}{\item[\textbf{Greek Symbols}]}{%
+\ifthenelse{\equal{#1}{Z}}{\item[\textbf{Acronyms / Abbreviations}]}{%
+\ifthenelse{\equal{#1}{R}}{\item[\textbf{Superscripts}]}{%
+\ifthenelse{\equal{#1}{S}}{\item[\textbf{Subscripts}]}{%
+\ifthenelse{\equal{#1}{X}}{\item[\textbf{Other Symbols}]}
 {}
 }% matches mathematical symbols > X
 }% matches Subscripts           > S
@@ -1072,7 +1048,6 @@ wish to left align your text}
     \RequirePackage{makeidx}
     \makeindex
     \newcommand{\printthesisindex}{
-        \cleardoublepage
         \phantomsection
         \printindex}
 \else
@@ -1130,9 +1105,8 @@ wish to left align your text}
   \end{center}
 \else
 % Normal abstract in the thesis
-  \cleardoublepage
   \setsinglecolumn
-  \chapter*{\centering \Large \@abstracttitle}
+  \chapter*{\centering \Large Abstract}
   \thispagestyle{empty}
 \fi
 }
